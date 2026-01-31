@@ -1,4 +1,4 @@
-# Astro Starter Kit: Basics
+# Historia de las Consolas - Astro Project
 
 ```sh
 npm create astro@latest -- --template basics
