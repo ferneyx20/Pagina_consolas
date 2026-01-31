@@ -4,8 +4,8 @@ import TimelineComponent from '../components/Timeline.jsx';
 ---
 
 <Layout title="Línea de Tiempo | Historia de Consolas">
-	<!-- Renderizado directo de la línea de tiempo como experiencia principal -->
-	<TimelineComponent client:load />
+	<!-- Renderizado directo de la línea de tiempo. Usamos client:only para evitar errores de hidratación -->
+	<TimelineComponent client:only="react" />
 </Layout>
 
 <style>
