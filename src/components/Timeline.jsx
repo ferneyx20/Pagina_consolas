@@ -1,6 +1,19 @@
 import React, { useState } from 'react';
 import '../styles/global.css';
 
+// Helper para rutas en GitHub Pages
+// Hardcodeamos la base para asegurar que funciona en producción
+const BASE_URL = '/Pagina_consolas';
+
+const resolvePath = (path) => {
+  // Si es una URL completa (http...), la dejamos igual
+  if (path.startsWith('http')) return path;
+  // Si ya tiene el prefijo, no lo duplicamos (por seguridad)
+  if (path.startsWith(BASE_URL)) return path;
+  // Añadimos prefijo
+  return `${BASE_URL}${path}`;
+};
+
 const consoles = [
   {
     id: 1,
@@ -231,7 +244,7 @@ export default function Timeline() {
               <div className="media-content">
                 <div className="unified-image-container">
                   <img
-                    src={selectedConsole.image}
+                    src={resolvePath(selectedConsole.image)}
                     alt={selectedConsole.name}
                     className="unified-image"
                     onError={(e) => {
@@ -263,7 +276,7 @@ export default function Timeline() {
               <div className="media-content">
                 <div className="unified-image-container">
                   <img
-                    src={selectedConsole.notable_game.image}
+                    src={resolvePath(selectedConsole.notable_game.image)}
                     alt={selectedConsole.notable_game.title}
                     className="unified-image"
                     onError={(e) => {
@@ -342,8 +355,8 @@ export default function Timeline() {
         /* Área de scroll principal */
         .main-scroll-area {
           flex: 1;
-          height: 100%;
-          overflow-y: auto; /* Scroll vital */
+          min-height: 0; /* Crucial para flexbox scroll */
+          overflow-y: auto;
           overflow-x: hidden;
           padding: 0;
           scroll-behavior: smooth;
