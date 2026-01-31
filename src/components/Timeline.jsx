@@ -199,15 +199,21 @@ const consoles = [
 
 export default function Timeline() {
   const [selectedConsole, setSelectedConsole] = useState(consoles[0]);
-  const [isAnimating, setIsAnimating] = useState(false);
+  // Quitamos isAnimating para evitar bloqueos
+
 
   const handleConsoleChange = (newConsole) => {
+    // Si es la misma, no hacer nada
     if (newConsole.id === selectedConsole.id) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setSelectedConsole(newConsole);
-      setIsAnimating(false);
-    }, 400);
+
+    // Cambio inmediato (sin setTimeouts que puedan fallar)
+    setSelectedConsole(newConsole);
+
+    // Reset del scroll
+    const scrollContainer = document.getElementById('main-scroll');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
   };
 
   return (
@@ -220,7 +226,7 @@ export default function Timeline() {
 
       {/* Contenido Principal con Scroll Unificado */}
       <div className="main-scroll-area" id="main-scroll">
-        <div className={`content-container ${isAnimating ? 'fade-out' : 'fade-in'}`}>
+        <div className="content-container">
 
           <div className="unified-layout">
 
