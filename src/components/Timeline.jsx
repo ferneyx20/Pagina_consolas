@@ -487,7 +487,9 @@ export default function Timeline() {
           display: flex;
           align-items: center;
           overflow-x: auto;
-          z-index: 20;
+          z-index: 100; /* Aumentado para asegurar visibilidad */
+          position: relative; /* Necesario para z-index */
+          pointer-events: auto; /* Garantizar captura de eventos */
         }
 
         .nav-track {
@@ -496,6 +498,7 @@ export default function Timeline() {
           min-width: 100%;
           margin: 0 auto;
           padding: 0 1rem;
+          pointer-events: auto;
         }
 
         .nav-item {
@@ -510,6 +513,8 @@ export default function Timeline() {
           opacity: 0.5;
           transition: all 0.3s ease;
           min-width: 60px;
+          pointer-events: auto; /* Forzar captura de clicks */
+          position: relative; /* Asegurar z-index funcione */
         }
 
         .nav-item:hover, .nav-item.active { opacity: 1; transform: translateY(-3px); }
